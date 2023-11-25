@@ -1,73 +1,86 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="page-wrapper">
-  <div class="page-content--bge5">
-    <div class="container">
-      <div class="login-wrap">
-        <div class="login-content">
-          <div class="login-logo">
-            <h2>PPDB</h2>
-            Login untuk mendaftarkan peserta didik baru
-          </div>
-          <div class="login-form">
-            <form action="{{ route('auth') }}" method="post">
-              @csrf
+<div class="login-box">
+  <div class="login-logo">
+    <a href="/"><b>PPDB</b></a>
+  </div>
 
-              @error('message')
-              <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
-                {{ $message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              @enderror
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Login untuk mendaftarkan peserta didik</p>
+      <hr>
+      <form action="{{ route('auth') }}" method="post">
+        @csrf
 
-              @if ($message = Session::get('success'))
-              <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
-                {{ $message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              @endif
-              
-              <div class="form-group">
-                <label for="username">Username</label>
-                <input class="au-input au-input--full @error('username') is-invalid @enderror" type="username" name="username" id="username" placeholder="Username">
-                @error('username')
-                  <div class="invalid-feedback d-block">{{ $message }}</div>
-                @enderror
-              </div>
+        @error('message')
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {{ $message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @enderror
 
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input class="au-input au-input--full @error('password') is-invalid @enderror" type="password" name="password" id="password"  placeholder="Password">
-                @error('password')
-                  <div class="invalid-feedback d-block">{{ $message }}</div>
-                @enderror
-              </div>
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ $message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @endif
 
-              <div class="login-checkbox">
-                <label>
-                  <input type="checkbox" name="remember">Remember Me
-                </label>
-                <label>
-                  <a href="#">Lupa Password?</a>
-                </label>
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="Username">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
               </div>
-              <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Log in</button>
-            </form>
-            <div class="register-link">
-              <p>
-                Belum punya akun?
-                <a href="{{ route('register') }}">Registrasi di sini</a>
-              </p>
             </div>
+            @error('username')
+            <span id="username-error" class="error invalid-feedback">
+              {{ $message }}
+            </span>
+            @enderror
           </div>
         </div>
-      </div>
+
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+            @error('password')
+            <span id="password-error" class="error invalid-feedback">
+              {{ $message }}
+            </span>
+            @enderror
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+          </div>
+        </div>
+      </form>
+      <hr>
+      Belum punya akun? <a href="{{ route('register') }}" class="text-center">Registrasi di sini</a>
     </div>
-  </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
 </div>
 @endsection
