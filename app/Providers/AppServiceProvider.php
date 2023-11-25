@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->publishes([
+            __DIR__.'/../../vendor/almasaeed2010/adminlte/plugins' => public_path('adminlte/plugins'),
+            __DIR__.'/../../vendor/almasaeed2010/adminlte/dist' => public_path('adminlte/dist')
+        ], 'adminlte');
     }
 }
