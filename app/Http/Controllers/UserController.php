@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,12 +16,9 @@ class UserController extends Controller
         return view('auth.login')->with('title', 'Log in');
     }
 
-    public function authenticate(Request $request)
+    public function authenticate(LoginRequest $request)
     {
-        $credentials = $request->validate([
-            'username' => 'required',
-            'password' => 'required',
-        ]);
+        $credentials = $request->validated();
  
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -37,14 +36,9 @@ class UserController extends Controller
         return view('auth.register')->with('title', 'Registrasi');
     }
     
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|max:100',
-            'username' => 'required|max:100|unique:users',
-            'password' => 'required|min:2|confirmed',
-            'password_confirmation' => 'required|min:2'
-        ]);
+        $data = $request->validated();
 
         $user = User::create($data);
         $user->password = Hash::make($request->password);
