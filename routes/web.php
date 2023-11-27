@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AsalSekolahController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrangTuaController;
+use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +32,10 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/pendaftaran/form-siswa', [SiswaController::class, 'index'])->name('form-siswa');
+    Route::post('/pendaftaran/form-siswa', [SiswaController::class, 'store']);
+    Route::get('/pendaftaran/form-orangtua', [OrangTuaController::class, 'index'])->name('form-orangtua');
+    Route::post('/pendaftaran/form-orangtua', [OrangTuaController::class, 'store']);
+    Route::get('/pendaftaran/form-asalsekolah', [AsalSekolahController::class, 'index'])->name('form-asalsekolah');
+    Route::post('/pendaftaran/form-asalsekolah', [AsalSekolahController::class, 'store']);
 });
