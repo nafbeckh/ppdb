@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Siswa extends Model
@@ -29,5 +30,10 @@ class Siswa extends Model
     public function asal_sekolah(): HasOne
     {
         return $this->HasOne(AsalSekolah::class, "siswa_id", "id");
+    }
+
+    public function pembayarans(): HasMany
+    {
+        return $this->HasMany(Pembayaran::class, "siswa_id", "id");
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AsalSekolahController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrangTuaController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -38,4 +39,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/pendaftaran/form-orangtua', [OrangTuaController::class, 'store']);
     Route::get('/pendaftaran/form-asalsekolah', [AsalSekolahController::class, 'index'])->name('form-asalsekolah');
     Route::post('/pendaftaran/form-asalsekolah', [AsalSekolahController::class, 'store']);
+    Route::post('/bayar', [PembayaranController::class, 'bayar'])->name('bayar');
 });
