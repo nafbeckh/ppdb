@@ -10,12 +10,13 @@
   <div class="container">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0"><small>Pendaftaran Siswa Baru</small></h1>
+        <h1 class="m-0"><small>{{ $title }}</small></h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-          <li class="breadcrumb-item active">Pendaftaran Siswa Baru</li>
+          <li class="breadcrumb-item"><a href="{{ route('home') }}">Pendaftaran Siswa Baru</a></li>
+          <li class="breadcrumb-item active">{{ $title }}</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -59,7 +60,7 @@
               @csrf
               <div id="data-orangtua" class="content" role="tabpanel" aria-labelledby="data-orangtua-trigger">
                 <div class="form-group">
-                  <label for="nama">Nama Lengkap*</label>
+                  <label for="nama">Nama Lengkap <small>(Orang tua/wali)</small>*</label>
                   <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ $orangTua['nama'] ?? '' }}" placeholder="Masukkan Nama Lengkap">
                   @error('nama')
                   <span id="username-error" class="error invalid-feedback">
