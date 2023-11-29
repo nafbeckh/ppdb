@@ -5,12 +5,12 @@
   <div class="container">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0"><small>Data Siswa</small></h1>
+        <h1 class="m-0"><small>{{ $title }}</small></h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Pengumuman</li>
+          <li class="breadcrumb-item active">{{ $title }}</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -23,7 +23,6 @@
       <div class="col-lg">
         <div class="card card-primary card-outline">
           <div class="card-body">
-            {{ $nilai }}
             <!-- Kuota Sekolah -->
             <h5 class="card-title mb-3 p-1 text-center text-dark">
               <span class="h6 text-dark">Kuota Sekolah</span>
