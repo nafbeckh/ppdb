@@ -24,8 +24,8 @@ class AsalSekolahRequest extends FormRequest
         return [
             'nama_sekolah' => 'required|max:200',
             'tahun_lulus' => 'required|numeric|digits:4',
-            'no_ijazah' => 'numeric|digits:12',
-            'nilai' => 'numeric'
+            'no_ijazah' => 'nullable|numeric|digits:12',
+            'nilai' => 'nullable|numeric'
         ];
     }
 }
