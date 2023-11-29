@@ -147,9 +147,47 @@
   </div><!-- /.container-fluid -->
 </div>
 
+<div class="modal fade" id="modal-default" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Panduan Pendaftaran</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">x</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li>Calon peserta didik baru menyiapkan <strong>BERKAS PERSYARATAN~</strong></li>
+        </ul>
+        <ul>
+          <li>Mempersiapkan kelengkapan berkas sesuai dengan ketentuan</li>
+        </ul>
+        <ul>
+          <li>Mempersiapkan kelengkapan berkas sesuai dengan ketentuan</li>
+        </ul>
+        <ul>
+          <li>Calon Siswa datang ke sekolah tujuan untuk melakukan <strong>VERIVIKASI PENDAFTARAN</strong> dengan membawa Tanda Bukti Pengajuan Pendaftaran dan kelengkapan Berkas.</li>
+        </ul>
+        <ul>
+          <li>Calon Siswa Menyiapkan Dokumen <strong>Kartu Keluarga (KK), KTP Orang Tua/Wali, dan Foto 3x4</strong></li>
+        </ul>
+        <ul>
+          <li>Calon Siswa melihat <strong>PENGUMUMAN HASIL AKHIR</strong></li>
+        </ul>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Mengerti</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection
 @push('js')
 <script>
+  $('#modal-default').modal('show');
   $('#jenis_kelamin').val(`{{ $siswa['jenis_kelamin'] ?? '' }}`)
 </script>
 @endpush
