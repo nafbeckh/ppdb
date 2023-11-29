@@ -23,6 +23,7 @@
       <div class="col-lg">
         <div class="card card-primary card-outline">
           <div class="card-body">
+            {{ $nilai }}
             <!-- Kuota Sekolah -->
             <h5 class="card-title mb-3 p-1 text-center text-dark">
               <span class="h6 text-dark">Kuota Sekolah</span>

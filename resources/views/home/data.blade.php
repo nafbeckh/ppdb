@@ -33,7 +33,7 @@
     <div class="callout callout-success" style="z-index: 1; top: 0; position: sticky;">
       <h5>Status anda belum resmi terdaftar</h5>
       Lakukan pembayaran biaya pendaftaran
-      <a href="#bayar" class="text-primary" id="pay-button" style="text-decoration: none;">di sini</a>.
+      <a href="#" class="text-primary" id="pay-button" style="text-decoration: none;">di sini</a>.
     </div>
 
     @push('js')

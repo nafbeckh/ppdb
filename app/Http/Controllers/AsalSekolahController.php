@@ -43,6 +43,7 @@ class AsalSekolahController extends Controller
 
         $asalSekolah = new AsalSekolah($request->input());
         $asalSekolah->siswa_id = $siswa->id;
+        $asalSekolah->nilai = $asalSekolah->nilai ?: 0;
         $asalSekolah->save();
 
         Session::forget(['siswa', 'orangTua', 'asalSekolah']);
