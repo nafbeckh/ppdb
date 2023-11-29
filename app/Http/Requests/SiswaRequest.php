@@ -22,7 +22,7 @@ class SiswaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nisn' => 'required|numeric|digits_between:10,16',
+            'nisn' => 'required|unique:siswas|numeric|digits_between:10,16',
             'nama' => 'required|max:200',
             'tempat_lahir' => 'required|max:200',
             'tgl_lahir' => 'required',
