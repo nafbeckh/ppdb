@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ env('app_name') }} - {{ $title }}</title>
 
-  <link rel="icon" type="image/x-icon" href="https://sumut.kabardaerah.com/wp-content/uploads/2018/01/as-3-9.jpg">
+  <link rel="icon" type="image/x-icon" href="{{ asset('logo_ppdb.png') }}">
 
   <!-- Google Font: Source Sans Pro -->
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
@@ -28,8 +28,7 @@
     <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
       <div class="container">
         <a href="{{ route('home') }}" class="navbar-brand">
-          <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-          <span class="brand-text font-weight-light">{{ env('app_name') }}</span>
+          <img src="{{ asset('logo_ppdb.png') }}" class="brand-image img-fluid" style="opacity: .8; width: 100px; height: 50px;">
         </a>
 
         <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -125,7 +124,7 @@
   <!-- SweetAlert2 -->
   <script src="{{ asset('adminlte/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
   @stack('js')
-  
+
   <script>
     function logout_() {
       Swal.fire({
