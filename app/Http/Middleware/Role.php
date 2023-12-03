@@ -18,7 +18,7 @@ class Role
         if ($request->user()->role == $role) {
             return $next($request);
         }
- 
+
         abort(403);
     }
 }

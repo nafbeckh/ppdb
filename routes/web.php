@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CalonSiswaController;
 use App\Http\Controllers\AsalSekolahController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrangTuaController;
@@ -32,6 +34,9 @@ Route::group(['middleware' => 'guest'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+});
+
+Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/pendaftaran/form-siswa', [SiswaController::class, 'index'])->name('form-siswa');
     Route::post('/pendaftaran/form-siswa', [SiswaController::class, 'store']);
@@ -40,4 +45,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/pendaftaran/form-asalsekolah', [AsalSekolahController::class, 'index'])->name('form-asalsekolah');
     Route::post('/pendaftaran/form-asalsekolah', [AsalSekolahController::class, 'store']);
     Route::post('/bayar', [PembayaranController::class, 'bayar'])->name('bayar');
+});
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::post('/admin/siswa/destroyBatch', [CalonSiswaController::class, 'destroyBatch'])->name('siswa.destroy.batch');
+    Route::resource('/admin/siswa', CalonSiswaController::class)->except('create', 'show');
 });

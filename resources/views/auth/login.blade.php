@@ -8,7 +8,7 @@
 
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Login untuk mendaftarkan peserta didik</p>
+      <p class="login-box-msg">Login untuk memulai sesi</p>
       <hr>
       <form action="{{ route('auth') }}" method="post">
         @csrf
