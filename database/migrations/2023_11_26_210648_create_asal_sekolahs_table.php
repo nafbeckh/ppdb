@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('nama_sekolah', 200);
             $table->year('tahun_lulus');
             $table->string('no_ijazah', 12)->nullable();
-            $table->integer('nilai')->default(0);
             $table->foreign('siswa_id')->references('id')->on('siswas');
             $table->timestamps();
         });

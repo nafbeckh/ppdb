@@ -89,16 +89,6 @@
                   @enderror
                 </div>
 
-                <div class="form-group">
-                  <label for="nilai">Nilai Rata-rata</label>
-                  <input type="text" class="form-control @error('nilai') is-invalid @enderror" id="nilai" name="nilai" value="{{ $asalSekolah['nilai'] ?? '' }}" placeholder="Masukkan Nilai Rata-rata">
-                  @error('nilai')
-                  <span id="username-error" class="error invalid-feedback">
-                    {{ $message }}
-                  </span>
-                  @enderror
-                </div>
-
                 <a href="{{ route('form-orangtua') }}" class="btn btn-secondary">Sebelumnya</a>
                 <button type="submit" class="btn btn-primary">Daftar</button>
               </div>

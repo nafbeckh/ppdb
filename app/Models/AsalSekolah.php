@@ -11,7 +11,7 @@ class AsalSekolah extends Model
     use HasFactory;
 
     protected $fillable = [
-        'siswa_id', 'nama_sekolah', 'tahun_lulus', 'no_ijazah', 'nilai'
+        'siswa_id', 'nama_sekolah', 'tahun_lulus', 'no_ijazah'
     ];
 
     public function siswa(): BelongsTo
