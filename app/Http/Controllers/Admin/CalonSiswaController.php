@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Setting;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -11,11 +12,13 @@ class CalonSiswaController extends Controller
 {
     public function index(Request $request)
     {
+        $ppdb = Setting::first();
+
         if ($request->ajax()) {
             return DataTables::of(Siswa::query())->toJson();
         }
         
-        return view('admin.siswa.index')->with('title', 'Calon Siswa');
+        return view('admin.siswa.index', compact('ppdb'))->with('title', 'Calon Siswa');
     }
 
     public function destroy($id)

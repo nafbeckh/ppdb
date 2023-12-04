@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>{{ env('app_name') }} - {{ $title }}</title>
+  <title>{{ $ppdb->nama_sekolah }} - {{ $title }}</title>
 
   <link rel="icon" type="image/x-icon" href="{{ asset('logo_ppdb.png') }}">
   <!-- Google Font: Source Sans Pro -->

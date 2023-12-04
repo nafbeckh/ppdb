@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrangTuaRequest;
+use App\Models\Setting;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -11,6 +12,8 @@ class OrangTuaController extends Controller
 {
     public function index()
     {
+        $ppdb = Setting::first();
+
         $siswaNotEmpty = Siswa::select('status')->where('user_id', Auth::user()->id)->first();
         
         if ($siswaNotEmpty) {
@@ -19,7 +22,7 @@ class OrangTuaController extends Controller
 
         $orangTua = Session::get('orangTua');
 
-        return view('orangtua.form')->with([
+        return view('orangtua.form', compact('ppdb'))->with([
             'title' => 'Data Orang Tua',
             'orangTua' => $orangTua
         ]);

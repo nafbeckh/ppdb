@@ -1,15 +1,5 @@
 @extends('layouts.user-template')
 
-@push('css')
-<style>
-  .img-pasfoto{
-    width: 3cm;
-    height: 4cm;
-    object-fit: cover;
-  }
-</style>
-@endpush
-
 @section('content')
 <div class="content-header">
   <div class="container">
@@ -135,7 +125,7 @@
                 
               </div>
               <div class="col-sm">
-                <img class="img-pasfoto" src="{{ $siswa->foto != null ? asset('pasfoto') . '/' . $siswa->foto : '' }}" alt="">
+                <img class="img-pasfoto" src="{{ $siswa->pasfoto != null ? asset('pasfoto') . '/' . $siswa->pasfoto : '' }}" alt="">
               </div>
             </div>
           </div>
@@ -227,15 +217,6 @@
               </div>
             </div>
             
-            <div class="row mb-4">
-              <div class="col-sm-3">
-                <p class="mb-0">Nilai Rata-rata</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">: {{ $siswa->asal_sekolah->nilai != 0 ? $siswa->asal_sekolah->nilai : '' }}</p>
-              </div>
-            </div>
-
           </div>
         </div><!-- /.card -->
       </div>

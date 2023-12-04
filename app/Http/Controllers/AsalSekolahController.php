@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AsalSekolahRequest;
 use App\Models\AsalSekolah;
 use App\Models\OrangTua;
+use App\Models\Setting;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -13,6 +14,8 @@ class AsalSekolahController extends Controller
 {
     public function index()
     {
+        $ppdb = Setting::first();
+
         $siswaNotEmpty = Siswa::select('status')->where('user_id', Auth::user()->id)->first();
         
         if ($siswaNotEmpty) {
@@ -21,7 +24,7 @@ class AsalSekolahController extends Controller
 
         $asalSekolah = Session::get('asalSekolah');
 
-        return view('asalsekolah.form')->with([
+        return view('asalsekolah.form', compact('ppdb'))->with([
             'title' => 'Data Asal Sekolah',
             'asalSekolah' => $asalSekolah
         ]);
@@ -43,7 +46,6 @@ class AsalSekolahController extends Controller
 
         $asalSekolah = new AsalSekolah($request->input());
         $asalSekolah->siswa_id = $siswa->id;
-        $asalSekolah->nilai = $asalSekolah->nilai ?: 0;
         $asalSekolah->save();
 
         Session::forget(['siswa', 'orangTua', 'asalSekolah']);

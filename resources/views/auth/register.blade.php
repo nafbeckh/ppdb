@@ -1,5 +1,11 @@
 @extends('layouts.auth')
 
+@if($tutup)
+  @push('css')
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+  @endpush
+@endif
 
 @section('content')
 <div class="register-box">
@@ -92,3 +98,20 @@
   </div><!-- /.card -->
 </div>
 @endsection
+
+@if($tutup)
+  @push('js')
+  <!-- SweetAlert2 -->
+  <script src="{{ asset('adminlte/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+  <script>
+    Swal.fire({
+        icon: 'info',
+        title: 'Pendaftaran ditutup',
+        text: 'Mohon maaf periode penerimaan peserta didik baru telah ditutup',
+        confirmButtonText: 'Oke',
+      }).then(function(result) {
+        window.location.href = `{{ route('login') }}`
+      })
+  </script>
+  @endpush
+@endif

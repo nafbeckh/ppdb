@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,9 @@ class UserController extends Controller
 {
     public function login()
     {
-        return view('auth.login')->with('title', 'Log in');
+        $ppdb = Setting::first();
+
+        return view('auth.login', compact('ppdb'))->with('title', 'Log in');
     }
 
     public function authenticate(LoginRequest $request)
@@ -37,7 +40,15 @@ class UserController extends Controller
 
     public function register()
     {
-        return view('auth.register')->with('title', 'Registrasi');
+        $ppdb = Setting::first();
+        
+        $tutup = false;
+
+        if (strtotime($ppdb->tgl_tutup) < strtotime('now')) {
+            $tutup = true;
+        }
+
+        return view('auth.register', compact('ppdb', 'tutup'))->with('title', 'Registrasi');
     }
     
     public function store(RegisterRequest $request)
