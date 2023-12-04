@@ -14,7 +14,7 @@ class Siswa extends Model
 
     protected $fillable = [
         'nisn', 'nama', 'tempat_lahir', 'tgl_lahir', 'jenis_kelamin', 'alamat', 'no_telp',
-        'foto', 'user_id', 'status'
+        'pasfoto', 'user_id', 'status'
     ];
 
     public function user(): BelongsTo

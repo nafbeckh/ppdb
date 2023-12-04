@@ -20,9 +20,9 @@ return new class extends Migration
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->text('alamat');
             $table->string('no_telp', 16)->nullable();
-            $table->string('foto', 200)->nullable();
+            $table->string('pasfoto', 200);
             $table->unsignedBigInteger('user_id');
-            $table->enum('status', ['Pending', 'Terdaftar', 'Diterima'])->default('Pending');
+            $table->enum('status', ['Pending', 'Terdaftar', 'Diterima', 'Ditolak'])->default('Pending');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

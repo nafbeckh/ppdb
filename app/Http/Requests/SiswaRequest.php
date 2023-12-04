@@ -28,7 +28,8 @@ class SiswaRequest extends FormRequest
             'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
-            'no_telp' => 'numeric|digits_between:12,16'
+            'no_telp' => 'numeric|digits_between:12,16',
+            // 'pasfoto' => 'required|image|mimes:jpeg,png,jpg,webp|max:1024'
         ];
     }
 }
