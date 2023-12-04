@@ -21,6 +21,65 @@ class CalonSiswaController extends Controller
         return view('admin.siswa.index', compact('ppdb'))->with('title', 'Calon Siswa');
     }
 
+    public function terverifikasi(Request $request)
+    {
+        $ppdb = Setting::first();
+
+        if ($request->ajax()) {
+            return DataTables::of(Siswa::where('status', 'Terdaftar')->get())->toJson();
+        }
+        
+        return view('admin.siswa.terverifikasi', compact('ppdb'))->with('title', 'Siswa Terverifikasi');
+    }
+
+    public function diterima(Request $request)
+    {
+        $ppdb = Setting::first();
+
+        if ($request->ajax()) {
+            return DataTables::of(Siswa::where('status', 'Diterima')->get())->toJson();
+        }
+        
+        return view('admin.siswa.diterima', compact('ppdb'))->with('title', 'Siswa Diterima');
+    }
+
+    public function terima($id)
+    {
+        $siswa = Siswa::findOrFail($id);
+        $siswa->status = 'Diterima';
+        $siswa->save();
+
+        if ($siswa) {
+            return response()->json(['status' => true, 'message' => 'Berhasil menerima siswa']);
+        } else {
+            return response()->json(['status' => false, 'message' => 'Gagal menerima siswa']);
+        }
+    }
+
+    public function ditolak(Request $request)
+    {
+        $ppdb = Setting::first();
+
+        if ($request->ajax()) {
+            return DataTables::of(Siswa::where('status', 'Ditolak')->get())->toJson();
+        }
+        
+        return view('admin.siswa.ditolak', compact('ppdb'))->with('title', 'Siswa Ditolak');
+    }
+
+    public function tolak($id)
+    {
+        $siswa = Siswa::findOrFail($id);
+        $siswa->status = 'Ditolak';
+        $siswa->save();
+
+        if ($siswa) {
+            return response()->json(['status' => true, 'message' => 'Berhasil menolak siswa']);
+        } else {
+            return response()->json(['status' => false, 'message' => 'Gagal menolak siswa']);
+        }
+    }
+
     public function destroy($id)
     {
         $siswa = Siswa::findOrFail($id);

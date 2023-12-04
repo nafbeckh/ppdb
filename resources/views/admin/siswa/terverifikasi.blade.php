@@ -48,7 +48,6 @@
           <table id="tableData" class="table table-sm table-hover table-bordered">
             <thead>
               <tr>
-                <th class="text-center checkbox-column dt-no-sorting"><input type="checkbox" class="text-center" data-toggle="tooltip" title="Select All Data"></th>
                 <th>NISN</th>
                 <th>Nama</th>
                 <th>Tempat Lahir</th>
@@ -87,7 +86,7 @@
       processing: true,
       serverSide: true,
       rowId: 'id',
-      ajax: "{{ route('siswa.index') }}",
+      ajax: "{{ route('siswa.terverifikasi') }}",
       lengthChange: false,
       'stateSave': false,
       "oLanguage": {
@@ -110,17 +109,12 @@
         "<'dt--bottom-section d-sm-flex justify-content-sm-between text-center'<'dt--pages-count  mb-sm-0 mb-3'i><'dt--pagination'p>>",
       autoWidth: false,
       order: [
-        [1, "asc"]
+        [0, "asc"]
       ],
       'select': {
         'style': 'multi'
       },
-      columns: [{
-          data: 'id',
-          render: function(data, type, row, meta) {
-            return `<input type="checkbox" name="id[]" value="${data}" class="new-control-input child-chk select-customers-info">`
-          }
-        },
+      columns: [
         {
           data: 'nisn'
         },
@@ -146,36 +140,15 @@
           title: 'Aksi',
           data: 'id',
           render: function(data, type, row, meta) {
-            let text = `<button type="button" id="btnDelete" data-id="${data}" class="btn btn-xs bg-gradient-danger"><i class="fas fa-trash-alt" data-toggle="tooltip" data-placement="top" title="Delete"></i></button>`;
+            let text = `
+            <button type="button" id="btnDetail" data-id="${data}" class="btn btn-xs bg-gradient-success" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fas fa-eye"></i></button>
+            <button type="button" id="btnTerima" data-id="${data}" class="btn btn-xs bg-gradient-primary" data-toggle="tooltip" data-placement="top" title="Terima"><i class="fas fa-check"></i></button>
+            <button type="button" id="btnTolak" data-id="${data}" class="btn btn-xs bg-gradient-danger" data-toggle="tooltip" data-placement="top" title="Tolak"><i class="fas fa-times"></i></button>`;
             return text;
           }
         }
       ],
       "buttons": [{
-        text: '<i class="fas fa-trash mr-2"></i>Hapus',
-        className: 'btn btn-sm btn-danger',
-        attr: {
-          'data-toggle': 'tooltip',
-          'title': 'Hapus yang dipilih'
-        },
-        action: function(e, dt, node, config) {
-          Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: '<i class="fa fa-thumbs-up"></i> Yes!',
-            confirmButtonAriaLabel: 'Thumbs up, Yes!',
-            cancelButtonText: '<i class="fa fa-thumbs-down"></i> No',
-            cancelButtonAriaLabel: 'Thumbs down',
-            padding: '2em'
-          }).then(function(result) {
-            if (result.value) {
-              $("#formDeleteBatch").submit();
-            }
-          })
-        }
-      }, {
         className: 'btn btn-sm btn-primary',
         extend: "pageLength",
         attr: {
@@ -191,19 +164,17 @@
 
     var id;
 
-    $('body').on('click', '#btnDelete', function() {
+    $('body').on('click', '#btnTerima', function() {
       id = $(this).data("id");
-      let url = "{{ route('siswa.destroy', ':id') }}";
+      let url = "{{ route('siswa.terima', ':id') }}";
       url = url.replace(':id', id);
       Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Apakah anda yakin?',
+        text: "Ingin menerima siswa ini!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: '<i class="fa fa-thumbs-up"></i> Yes!',
-        confirmButtonAriaLabel: 'Thumbs up, Yes!',
-        cancelButtonText: '<i class="fa fa-thumbs-down"></i> No',
-        cancelButtonAriaLabel: 'Thumbs down',
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Batal',
         padding: '2em'
       }).then(function(result) {
         if (result.value) {
@@ -213,7 +184,7 @@
             }
           });
           $.ajax({
-            type: "DELETE",
+            type: "POST",
             url: url,
             success: function(res) {
               table.ajax.reload();
@@ -244,53 +215,56 @@
       })
     });
 
-    $('#formDeleteBatch').submit(function(event) {
-      var form = this;
-
-      event.preventDefault();
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-      $.ajax({
-        type: 'POST',
-        url: "{{ route('siswa.destroy.batch') }}",
-        data: $(form).serialize(),
-        beforeSend: function() {
-          console.log('otw')
-        },
-        success: function(res) {
-          table.ajax.reload();
-          if (res.status == true) {
-            Swal.fire(
-              'Deleted!',
-              res.message,
-              'success'
-            )
-          } else {
-            Swal.fire(
-              'Failed!',
-              res.message,
-              'error'
-            )
-          }
-        },
-        error: function(xhr, status, error) {
-
-          table.rows('.selected').nodes().to$().removeClass('selected');
-          er = xhr.responseJSON.errors
-          console.log(er);
-          Swal.fire(
-            'Failed!',
-            'Server Error',
-            'error'
-          )
+    $('body').on('click', '#btnTolak', function() {
+      id = $(this).data("id");
+      let url = "{{ route('siswa.tolak', ':id') }}";
+      url = url.replace(':id', id);
+      Swal.fire({
+        title: 'Apakah anda yakin?',
+        text: "Ingin menolak siswa ini!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Batal',
+        padding: '2em'
+      }).then(function(result) {
+        if (result.value) {
+          $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            }
+          });
+          $.ajax({
+            type: "POST",
+            url: url,
+            success: function(res) {
+              table.ajax.reload();
+              if (res.status == true) {
+                Swal.fire(
+                  'Success!',
+                  res.message,
+                  'success'
+                )
+              } else {
+                Swal.fire(
+                  'Failed!',
+                  res.message,
+                  'error'
+                )
+              }
+            },
+            error: function(data) {
+              console.log('Error:', data);
+              Swal.fire(
+                'Failed!',
+                'Server Error',
+                'error'
+              )
+            }
+          });
         }
       })
-
     });
-
   });
 </script>
 @endpush

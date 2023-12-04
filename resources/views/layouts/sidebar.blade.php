@@ -36,21 +36,21 @@
         </li>
 
         <li class="nav-item">
-          <a href="" class="nav-link {{ $title == 'Siswa Terverifikasi' ? 'active' : '' }}">
+          <a href="{{ route('siswa.terverifikasi') }}" class="nav-link {{ $title == 'Siswa Terverifikasi' ? 'active' : '' }}">
             <i class="nav-icon fas fa-user-check"></i>
             <p>Siswa Terverifikasi</p>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="" class="nav-link {{ $title == 'Siswa Diterima' ? 'active' : '' }}">
+          <a href="{{ route('siswa.diterima') }}" class="nav-link {{ $title == 'Siswa Diterima' ? 'active' : '' }}">
             <i class="nav-icon fas fa-user-plus"></i>
             <p>Siswa Diterima</p>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="" class="nav-link {{ $title == 'Siswa Ditolak' ? 'active' : '' }}">
+          <a href="{{ route('siswa.ditolak') }}" class="nav-link {{ $title == 'Siswa Ditolak' ? 'active' : '' }}">
             <i class="nav-icon fas fa-user-times"></i>
             <p>Siswa Ditolak</p>
           </a>

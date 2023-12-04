@@ -51,8 +51,16 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::post('/admin/siswa/destroyBatch', [CalonSiswaController::class, 'destroyBatch'])->name('siswa.destroy.batch');
-    Route::resource('/admin/siswa', CalonSiswaController::class)->except('create', 'show');
+    Route::get('/admin/siswa', [CalonSiswaController::class, 'index'])->name('siswa.index');
+    Route::get('/admin/terverifikasi', [CalonSiswaController::class, 'terverifikasi'])->name('siswa.terverifikasi');
+    Route::get('/admin/diterima', [CalonSiswaController::class, 'diterima'])->name('siswa.diterima');
+    Route::get('/admin/ditolak', [CalonSiswaController::class, 'ditolak'])->name('siswa.ditolak');
+
+    Route::post('/admin/siswa/terima/{id}', [CalonSiswaController::class, 'terima'])->name('siswa.terima');
+    Route::post('/admin/siswa/tolak/{id}', [CalonSiswaController::class, 'tolak'])->name('siswa.tolak');
+
+    Route::post('/admin/siswa/destroy/{id}', [CalonSiswaController::class, 'destroy'])->name('siswa.destroy');
+    Route::post('/admin/siswa', [CalonSiswaController::class, 'destroyBatch'])->name('siswa.destroy.batch');
 
     Route::get('/admin/setting', [SettingController::class, 'index'])->name('setting.ppdb');
     Route::post('/admin/setting', [SettingController::class, 'update'])->name('setting.ppdb.update');
