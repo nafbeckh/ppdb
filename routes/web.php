@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CalonSiswaController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\AsalSekolahController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrangTuaController;
@@ -52,4 +53,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::post('/admin/siswa/destroyBatch', [CalonSiswaController::class, 'destroyBatch'])->name('siswa.destroy.batch');
     Route::resource('/admin/siswa', CalonSiswaController::class)->except('create', 'show');
+
+    Route::get('/admin/setting', [SettingController::class, 'index'])->name('setting.ppdb');
+    Route::post('/admin/setting', [SettingController::class, 'update'])->name('setting.ppdb.update');
 });

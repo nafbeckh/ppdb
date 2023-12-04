@@ -58,7 +58,7 @@
 
         <li class="nav-header">SETTING</li>
         <li class="nav-item">
-          <a href="" class="nav-link {{ $title == 'Siswa' ? 'active' : '' }}">
+          <a href="{{ route('setting.ppdb') }}" class="nav-link {{ $title == 'Setting PPDB' ? 'active' : '' }}">
             <i class="nav-icon fas fa-cogs"></i>
             <p>PPDB</p>
           </a>
