@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('siswa_id');
             $table->enum('status', ['Pending', 'Paid'])->default('Pending');
-            $table->foreign('siswa_id')->references('id')->on('siswas');
             $table->timestamps();
         });
     }

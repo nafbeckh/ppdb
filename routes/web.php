@@ -59,8 +59,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/siswa/terima/{id}', [CalonSiswaController::class, 'terima'])->name('siswa.terima');
     Route::post('/admin/siswa/tolak/{id}', [CalonSiswaController::class, 'tolak'])->name('siswa.tolak');
 
-    Route::post('/admin/siswa/destroy/{id}', [CalonSiswaController::class, 'destroy'])->name('siswa.destroy');
-    Route::post('/admin/siswa', [CalonSiswaController::class, 'destroyBatch'])->name('siswa.destroy.batch');
+    Route::delete('/admin/siswa/destroy/{id}', [CalonSiswaController::class, 'destroy'])->name('siswa.destroy');
+    Route::delete('/admin/siswa', [CalonSiswaController::class, 'destroyBatch'])->name('siswa.destroy.batch');
 
     Route::get('/admin/setting', [SettingController::class, 'index'])->name('setting.ppdb');
     Route::post('/admin/setting', [SettingController::class, 'update'])->name('setting.ppdb.update');

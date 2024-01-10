@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AsalSekolah;
+use App\Models\OrangTua;
 use App\Models\Setting;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
@@ -82,8 +84,9 @@ class CalonSiswaController extends Controller
 
     public function destroy($id)
     {
-        $siswa = Siswa::findOrFail($id);
-        $siswa->delete();
+        AsalSekolah::where('siswa_id', $id)->delete();
+        OrangTua::where('siswa_id', $id)->delete();
+        $siswa = Siswa::findOrFail($id)->delete();
 
         if ($siswa) {
             return response()->json(['status' => true, 'message' => 'Berhasil menghapus data siswa']);
@@ -97,6 +100,8 @@ class CalonSiswaController extends Controller
         if ($request->id) {
             foreach ($request->id as $id) {
                 $siswa = Siswa::findOrFail($id);
+                AsalSekolah::where('siswa_id', $id)->delete();
+                OrangTua::where('siswa_id', $id)->delete();
                 $siswa->delete();
             }
 
