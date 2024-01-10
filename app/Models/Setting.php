@@ -10,6 +10,6 @@ class Setting extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama_sekolah', 'tgl_buka', 'tgl_tutup', 'tgl_selesai', 'logo' 
+        'nama_sekolah', 'tgl_buka', 'tgl_tutup', 'tgl_pengumuman', 'logo' 
     ];
 }
