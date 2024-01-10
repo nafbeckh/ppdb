@@ -20,7 +20,7 @@
 <div class="content">
   <div class="container">
     @if($siswa->status == 'Pending')
-    <div class="callout callout-success" style="z-index: 1; top: 0; position: sticky;">
+    <div class="callout callout-danger" style="z-index: 1; top: 0; position: sticky;">
       <h5>Status anda belum resmi terdaftar</h5>
       Lakukan pembayaran biaya pendaftaran
       <a href="#" class="text-primary" id="pay-button" style="text-decoration: none;">di sini</a>.
@@ -55,6 +55,21 @@
     </script>
     @endpush
     @endif
+
+    @isset($diterima)
+      @if($diterima)
+      <div class="callout callout-success" style="z-index: 1; top: 0; position: sticky;">
+        <h5>Pengumuman Penerimaan Peserta Didik Baru</h5>
+        Selamat, anda telah dinyatakan di terima di sekolah {{ $ppdb->nama_sekolah }}.
+      </div>
+      @else
+      <div class="callout callout-danger" style="z-index: 1; top: 0; position: sticky;">
+        <h5>Pengumuman Penerimaan Peserta Didik Baru</h5>
+        Mohon maaf, anda dinyatakan tidak diterima di sekolah {{ $ppdb->nama_sekolah }}<Br>
+        Tetap semangat dan pantang menyerah.
+      </div>
+      @endif
+    @endisset
 
     <div class="row">
       <div class="col-lg">

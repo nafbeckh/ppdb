@@ -23,8 +23,20 @@ class HomeController extends Controller
                     ->first();
 
         if ($siswa) {
+            $diterima = null;
+
+            if (strtotime($ppdb->tgl_pengumuman) <= strtotime('now')) {
+                if ($siswa->status == 'Diterima') {
+                    $diterima = true;
+                }
+    
+                if ($siswa->status == 'Ditolak') {
+                    $diterima = false;
+                }
+            }
+
             $siswa->tgl_lahir = Carbon::parse($siswa->tgl_lahir)->format('d M Y');
-            return view('home.data', compact(['ppdb', 'siswa']))->with('title', 'Beranda');
+            return view('home.data', compact(['ppdb', 'siswa', 'diterima']))->with('title', 'Beranda');
         }
 
         return view('home.index', compact('ppdb'))->with('title', 'Beranda');
