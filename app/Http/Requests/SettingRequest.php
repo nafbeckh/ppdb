@@ -26,7 +26,7 @@ class SettingRequest extends FormRequest
             'tgl_buka' => 'required',
             'tgl_tutup' => 'required',
             'tgl_pengumuman' => 'required',
-            'logo' => 'required|mimes:jpg,jpeg,png,webp|max:1024'
+            'logo' => 'nullable|mimes:jpg,jpeg,png,webp|max:1024'
         ];
     }
 }
