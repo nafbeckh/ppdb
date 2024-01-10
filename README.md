@@ -20,7 +20,7 @@ Aplikasi Penerimaan Peserta Didik Baru berbasis web yang dibangun menggunakan <a
 7. Migrasi database `php artisan migrate --seed`
 8. Copy assets AdminLTE ke public `php artisan vendor:publish --tag=adminlte`
 9. Jalankan server `php artisan serv`
-10. Jalankan server dengan ngrok `ngrok http http:127.0.0.1:8000`
+10. Jalankan server dengan ngrok `ngrok http 8000` atau `ngrok http http://127.0.0.1:8000`
 11. Konfigurasi <a href="https://midtrans.com">Midtrans</a> lalu sesuaikan dengan project ini.
 
 Note: ngrok berfungsi untuk mengubah URL localhost agar dapat diakses oleh midtrans ketika status pembayaran berhasil. Tambahkan endpoint `/api/midtrans-callback`.
